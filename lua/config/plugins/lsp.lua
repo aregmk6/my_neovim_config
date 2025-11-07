@@ -17,7 +17,9 @@ return {
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       vim.lsp.config('lua_ls', { capabilities = capabilities })
+      vim.lsp.config('clangd', { capabilities = capabilities })
       vim.lsp.enable('lua_ls')
+      vim.lsp.enable('clangd')
 
       vim.keymap.set('n', 'gK', function()
         local new_config = not vim.diagnostic.config().virtual_lines
