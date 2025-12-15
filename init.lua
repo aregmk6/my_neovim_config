@@ -40,7 +40,7 @@ vim.o.inccommand = 'split'
 vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+vim.o.scrolloff = 5
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
@@ -101,3 +101,19 @@ end)
 vim.keymap.set("n", "<space>tm", function()
   vim.fn.chansend(job_id, { "make\r" })
 end)
+
+-- cpp assist bindings
+
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- switch between source and header
+map('n', '<leader>sw', '<Cmd>SwitchSourceAndHeader<CR>', opts)
+-- generate the function definition or static variable definition in source
+map('n', '<leader>cf', '<Cmd>ImplementInSource<CR>', opts)
+-- generate the function definition or static variable definition in source in visual mode
+map('v', '<leader>cf', '<Cmd>lua require("cppassist").ImplementInSourceInVisualMode<CR>', opts)
+-- generate the function definition or static variable definition in header
+map('n', '<leader>cv', '<Cmd>ImplementOutOfClass<CR>', opts)
+-- goto the header file
+map('n', '<leader>gh', '<Cmd>GotoHeaderFile<CR>', opts)

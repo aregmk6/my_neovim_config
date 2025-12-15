@@ -20,6 +20,7 @@ return {
       vim.lsp.config('clangd', { capabilities = capabilities })
       vim.lsp.enable('lua_ls')
       vim.lsp.enable('clangd')
+      vim.lsp.enable('pyright')
 
       vim.keymap.set('n', 'gK', function()
         local new_config = not vim.diagnostic.config().virtual_lines
