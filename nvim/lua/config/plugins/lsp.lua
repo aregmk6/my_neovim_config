@@ -37,9 +37,11 @@ return {
       vim.lsp.config('clangd', { capabilities = capabilities })
       vim.lsp.config('gopls', { capabilities = capabilities })
       vim.lsp.config('texlab', { capabilities = capabilities })
+      vim.lsp.config('pyright', { capabilities = capabilities })
+      vim.lsp.config('ols', { capabilities = capabilities })
 
       -- I have these installed locally on my system
-      vim.lsp.enable({ 'lua_ls', 'clangd', 'gopls', 'texlab' })
+      vim.lsp.enable({ 'lua_ls', 'clangd', 'gopls', 'texlab', 'pyright', 'ols' })
       -- These are from mason
 
       vim.keymap.set('n', 'gK', function()

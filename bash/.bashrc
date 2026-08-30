@@ -1,0 +1,53 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+
+# ------------------ my additions begin ------------------ 
+
+## function overides
+find2() { command find "$@" 2>/dev/null; }
+
+## aliases
+alias nv='nvim .'
+alias preventsleep='systemd-inhibit --why="Manual sleep inhibit until turned off" --what=sleep sleep infinity'
+
+## btctl aliases
+alias btctl='bluetoothctl'
+alias btair='btctl connect C0:B2:2F:82:53:B4'
+alias btxm='btctl connect 88:C9:E8:07:59:ED'
+alias btdis='btctl disconnect'
+
+# PATH
+export PATH="$HOME/bin:$PATH"
+
+# zoxide
+eval "$(zoxide init bash)"
+
+# fzf
+eval "$(fzf --bash)"
+
+# yazi
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+export TERMINAL="kitty"
+export EDITOR="nvim"
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+
+# ------------------  my additions end ------------------ 
+
+# Created by `pipx` on 2026-07-06 11:56:01
+export PATH="$PATH:/home/aregmk/.local/bin"
